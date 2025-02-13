@@ -1,6 +1,7 @@
-import ProductList from "../components/ProductList"
-import CryptoRates from "../components/CryptoRates"
 
+import CryptoRates from './components/CryptoRates'
+import ProductList from './components/ProductList'
+import Footer from './components/Footer';
 export default function Home() {
   return (
     <main className="container mx-auto px-4 py-8">
@@ -9,6 +10,7 @@ export default function Home() {
         <CryptoRates />
       </div>
       <ProductList />
+      <Footer />
     </main>
   )
 }
