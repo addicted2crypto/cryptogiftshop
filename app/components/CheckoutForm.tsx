@@ -37,30 +37,30 @@ export default function CheckoutForm({ product }: CheckoutFormProps) {
       })
       const ethereum = MMSDK.getProvider()
 
-      // Check if MetaMask is installed
+      
       if (!ethereum) {
         throw new Error("Please install MetaMask to make payments")
       }
 
-      // Request account access
+      
       await ethereum.request({ method: "eth_requestAccounts" })
 
-      // Create a new Web3Provider
+      
       const provider = new ethers.BrowserProvider(ethereum)
 
-      // Get the signer
+      
       const signer = provider.getSigner()
 
-      // Send the transaction
+      
       const tx = await (await signer).sendTransaction({
-        to: "mywallet.eth", // Replace with your wallet address
+        to: "mywallet.eth",
         value: ethers.parseEther(product.price.toString()),
       })
 
-      // Wait for the transaction to be mined
+      
       await tx.wait()
 
-      // Process the order (you would typically send this to your backend)
+      //will add backend storage for orders
       const order = {
         product,
         shippingInfo: { name, address, city, state, zip },
@@ -69,7 +69,7 @@ export default function CheckoutForm({ product }: CheckoutFormProps) {
 
       console.log("Order processed:", order)
 
-      // Set order status to success
+      
       setOrderStatus("success")
     } catch (error) {
       console.error("Error processing payment:", error)
